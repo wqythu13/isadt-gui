@@ -1,0 +1,33 @@
+system
+	module P1
+		int[0:256] a;
+		int[0:256] b;
+		int[0:256] alice;
+		label channel;
+		location _init, _final, S2;
+
+		init _init do {
+		};
+		from S2 to _final do {
+			alice = alice + 10;
+		};
+		from _init to S2 do {
+		};
+	end
+
+	module P2
+		int[0:256] bob;
+		label channel;
+		location _init, _final, S3;
+
+		init _init do {
+		};
+		from S3 to _final do {
+			bob = bob;
+		};
+		from _init to S3 do {
+		};
+	end
+
+		INVARSPEC (!(P1.location == _final))
+end
